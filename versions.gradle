@@ -1,0 +1,5 @@
+ext{
+    coreVersion = "1.1.0"
+    nanohttpd = "2.3.1"
+    retrofit2Version = "2.4.0"
+}
