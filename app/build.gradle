@@ -4,6 +4,8 @@ apply plugin: 'kotlin-android'
 
 apply plugin: 'kotlin-android-extensions'
 
+apply plugin: 'kotlin-kapt'
+
 android {
     compileSdkVersion 29
     buildToolsVersion "29.0.2"
@@ -24,6 +26,7 @@ android {
             buildConfigField('String', 'FILEPROVIDER_CLASSNAME', "\"${FILEPROVIDER_CLASSNAME}\"")
             buildConfigField('String', 'GET_URI_ACTION', "\"${GET_URI_ACTION}\"")
             buildConfigField('String', 'MOVE_TO_FOREGROUND_ACTION', "\"${MOVE_TO_FOREGROUND_ACTION}\"")
+            buildConfigField('String', 'BASE_URL', "\"${BASE_URL}\"")
 
         }
         release {
@@ -34,6 +37,8 @@ android {
             buildConfigField('String', 'FILEPROVIDER_CLASSNAME', "\"${FILEPROVIDER_CLASSNAME}\"")
             buildConfigField('String', 'GET_URI_ACTION', "\"${GET_URI_ACTION}\"")
             buildConfigField('String', 'MOVE_TO_FOREGROUND_ACTION', "\"${MOVE_TO_FOREGROUND_ACTION}\"")
+            buildConfigField('String', 'BASE_URL', "\"${BASE_URL}\"")
+
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
@@ -55,4 +60,13 @@ dependencies {
     implementation "com.squareup.retrofit2:retrofit:$retrofit2Version"
     implementation "com.squareup.retrofit2:converter-gson:$retrofit2Version"
     implementation "com.squareup.retrofit2:adapter-rxjava2:$retrofit2Version"
+    implementation "javax.inject:javax.inject:$javaxInjectVersion"
+    implementation "com.squareup.okhttp3:logging-interceptor:$okhttpVersion"
+
+    implementation "com.google.dagger:dagger:$daggerVersion"
+    implementation "com.google.dagger:dagger-android:$daggerVersion"
+    kapt "com.google.dagger:dagger-compiler:$daggerVersion"
+    kapt "com.google.dagger:dagger-android-processor:$daggerVersion"
+
+
 }

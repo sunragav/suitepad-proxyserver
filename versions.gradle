@@ -2,4 +2,12 @@ ext{
     coreVersion = "1.1.0"
     nanohttpd = "2.3.1"
     retrofit2Version = "2.4.0"
+    javaxInjectVersion = "1"
+    okhttpVersion = "4.2.2"
+
+    daggerVersion = "2.24"
+    rxJavaVersion = "2.2.0"
+    rxAndroidVersion = "2.1.0"
+    rxRelayVersion = "2.1.1"
+    okhttpVersion = "3.10.0"
 }
