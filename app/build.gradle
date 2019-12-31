@@ -16,7 +16,24 @@ android {
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
+        debug{
+            buildConfigField('String', 'WEBVIEW_APPLICATION_ID', "\"${WEBVIEW_APPLICATION_ID}\"")
+            buildConfigField('String', 'WEBVIEW_CLASSNAME', "\"${WEBVIEW_CLASSNAME}\"")
+            buildConfigField('String', 'BROADCAST_ACTION_PROXY_STARTED', "\"${BROADCAST_ACTION_PROXY_STARTED}\"")
+            buildConfigField('String', 'FILEPROVIDER_APPLICATION_ID', "\"${FILEPROVIDER_APPLICATION_ID}\"")
+            buildConfigField('String', 'FILEPROVIDER_CLASSNAME', "\"${FILEPROVIDER_CLASSNAME}\"")
+            buildConfigField('String', 'GET_URI_ACTION', "\"${GET_URI_ACTION}\"")
+            buildConfigField('String', 'MOVE_TO_FOREGROUND_ACTION', "\"${MOVE_TO_FOREGROUND_ACTION}\"")
+
+        }
         release {
+            buildConfigField('String', 'WEBVIEW_APPLICATION_ID', "\"${WEBVIEW_APPLICATION_ID}\"")
+            buildConfigField('String', 'WEBVIEW_CLASSNAME', "\"${WEBVIEW_CLASSNAME}\"")
+            buildConfigField('String', 'BROADCAST_ACTION_PROXY_STARTED', "\"${BROADCAST_ACTION_PROXY_STARTED}\"")
+            buildConfigField('String', 'FILEPROVIDER_APPLICATION_ID', "\"${FILEPROVIDER_APPLICATION_ID}\"")
+            buildConfigField('String', 'FILEPROVIDER_CLASSNAME', "\"${FILEPROVIDER_CLASSNAME}\"")
+            buildConfigField('String', 'GET_URI_ACTION', "\"${GET_URI_ACTION}\"")
+            buildConfigField('String', 'MOVE_TO_FOREGROUND_ACTION', "\"${MOVE_TO_FOREGROUND_ACTION}\"")
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }

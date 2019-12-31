@@ -19,7 +19,7 @@ class WebServerApplication : Application(){
         createNotificationChannel()
     }
 
-    fun createNotificationChannel(){
+    private fun createNotificationChannel(){
         if(SDK_INT>=O){
            val notification = NotificationChannel(
                CHANNEL_ID,
