@@ -121,7 +121,7 @@ class ProxyWebServer : DaggerService() {
                     with(serviceRef.get()!!) {
                         isBound = true
                         messengerToSendMsgToRemoteActivity = msg.replyTo
-                        startActivity(intents["FileProvider"])
+                        startActivity(intents[FILE_PROVIDER])
                     }
                 }
             }
@@ -131,7 +131,7 @@ class ProxyWebServer : DaggerService() {
     companion object {
         private const val PORT = 8091
         private const val WEB_VIEW = "WebView"
-        private const val FILE_PROVIDER = "WebView"
+        private const val FILE_PROVIDER = "FileProvider"
         private const val MSG_HTTP_SERVER_STARTED = 2
         private const val NOTIFY_WEBVIEW_WHEN_HTTP_SERVER_STARTS = 1
 
