@@ -3,7 +3,10 @@ package com.sunragav.suitepad.proxyserver
 import android.app.PendingIntent
 import android.content.ClipData
 import android.content.Intent
+import android.os.Handler
 import android.os.IBinder
+import android.os.Message
+import android.os.Messenger
 import androidx.core.app.NotificationCompat
 import app.WebServerApplication.Companion.CHANNEL_ID
 import com.sunragav.suitepad.data.Repository
@@ -20,10 +23,12 @@ class ProxyWebServer : DaggerService() {
     @Inject
     lateinit var repository: Repository
 
+    private val messenger = Messenger(IncomingHandler())
+
     private lateinit var server: SuitePadHttpServer
 
     override fun onBind(intent: Intent): IBinder? {
-        return null
+        return messenger.binder
     }
 
     override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
@@ -82,6 +87,13 @@ class ProxyWebServer : DaggerService() {
         server.stop()
     }
 
+    inner class IncomingHandler : Handler() {
+        override fun handleMessage(msg: Message) {
+            when (msg.what) {
+
+            }
+        }
+    }
     companion object {
         private const val PORT = 8091
     }

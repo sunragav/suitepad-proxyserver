@@ -23,11 +23,11 @@ class SuitePadHttpServer(
                 val urlString = session.uri.toString()
                 when {
                     urlString.endsWith("sample.html") -> {
-                        result = dataSource.getString(htmlUri, disposable)
+                        result = dataSource.getString(htmlUri, disposable).blockingGet()
 
                     }
                     urlString.endsWith("sample.json") -> {
-                        result = dataSource.getString(jsonUri, disposable)
+                        result = dataSource.getString(jsonUri, disposable).blockingGet()
 
                     }
                 }
