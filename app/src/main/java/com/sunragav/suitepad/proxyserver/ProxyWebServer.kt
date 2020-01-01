@@ -1,9 +1,8 @@
 package com.sunragav.suitepad.proxyserver
 
 import android.app.PendingIntent
-import android.content.Context
+import android.content.ClipData
 import android.content.Intent
-import android.net.Uri
 import android.os.IBinder
 import androidx.core.app.NotificationCompat
 import app.WebServerApplication.Companion.CHANNEL_ID
@@ -11,23 +10,17 @@ import com.sunragav.suitepad.data.Repository
 import com.sunragav.suitepad.proxyserver.BuildConfig.GET_URI_ACTION
 import com.sunragav.suitepad.proxyserver.BuildConfig.MOVE_TO_FOREGROUND_ACTION
 import dagger.android.DaggerService
-import fi.iki.elonen.NanoHTTPD
 import fi.iki.elonen.NanoHTTPD.SOCKET_READ_TIMEOUT
-import io.reactivex.disposables.CompositeDisposable
-import java.util.concurrent.atomic.AtomicReference
 import javax.inject.Inject
 
 
 class ProxyWebServer : DaggerService() {
-
     @Inject
     lateinit var intents: Map<String, @JvmSuppressWildcards Intent>
     @Inject
     lateinit var repository: Repository
 
-    private val server = SuitePadHTTPServer(this, PORT)
-    private var htmlUri = AtomicReference<Uri>()
-    private var jsonUri = AtomicReference<Uri>()
+    private lateinit var server: SuitePadHttpServer
 
     override fun onBind(intent: Intent): IBinder? {
         return null
@@ -53,17 +46,24 @@ class ProxyWebServer : DaggerService() {
     private fun handleGetUriAction(proxyIntent: Intent) {
         val clipData = proxyIntent.clipData
         if (clipData?.itemCount == 2) {
-            htmlUri.set(clipData.getItemAt(0).uri)
-            jsonUri.set(clipData.getItemAt(1).uri)
+            initHttpServer(clipData)
+        }
+    }
 
-            if (server.isAlive.not()) {
-                server.start(SOCKET_READ_TIMEOUT, false)
+    private fun initHttpServer(clipData: ClipData) {
+        if (::server.isInitialized.not())
+            server = SuitePadHttpServer(
+                port = PORT,
+                dataSource = repository,
+                htmlUri = clipData.getItemAt(0).uri,
+                jsonUri = clipData.getItemAt(1).uri
+            )
 
-                sendBroadcast(intents["Broadcast"].also {
-                    it?.putExtra("port", server.listeningPort)
-                })
-            }
-
+        if (server.isAlive.not()) {
+            server.start(SOCKET_READ_TIMEOUT, false)
+            sendBroadcast(intents["Broadcast"].also {
+                it?.putExtra("port", server.listeningPort)
+            })
         }
     }
 
@@ -80,39 +80,6 @@ class ProxyWebServer : DaggerService() {
     override fun onDestroy() {
         super.onDestroy()
         server.stop()
-    }
-
-    inner class SuitePadHTTPServer(private val context: Context, port: Int) : NanoHTTPD(port) {
-        private var result = ""
-        override fun serve(session: IHTTPSession): Response {
-            result = "Hello Proxy"
-
-            when (session.method) {
-                Method.GET -> {
-                    val disposable = CompositeDisposable()
-
-                    //android.os.Debug.waitForDebugger()
-                    val urlString = session.uri.toString()
-                    when {
-                        urlString.endsWith("sample.html") -> {
-                            if (htmlUri.get() != null)
-                                result = repository.getString(htmlUri.get(), disposable)
-
-                        }
-                        urlString.endsWith("sample.json") -> {
-                            if (jsonUri.get() != null)
-                                result = repository.getString(jsonUri.get(), disposable)
-
-                        }
-                    }
-
-                    disposable.dispose()
-
-                }
-                else -> result = "Unknown method"
-            }
-            return newFixedLengthResponse(result)
-        }
     }
 
     companion object {
