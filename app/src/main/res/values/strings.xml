@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">SuitePad Proxyserver2</string>
+    <string name="pendingIntentTitle">\"Web Proxy Server for the SuitePad\"</string>
 </resources>
