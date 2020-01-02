@@ -2,6 +2,7 @@ package com.sunragav.suitepad.data.remotedata.api
 
 import com.sunragav.suitepad.data.remotedata.models.SuitepadRemoteData
 import io.reactivex.Single
+import java.util.concurrent.TimeUnit
 
 class FakeSuitePadService : SuitePadService {
     companion object {
@@ -9,8 +10,6 @@ class FakeSuitePadService : SuitePadService {
     }
 
     override fun getSampleJson(): Single<List<SuitepadRemoteData>> {
-        println("Fake Suitepad service is being called for serving sample.json!!")
-        Thread.sleep(FAKE_DELAY)
         return Single.just(
             listOf(
                 SuitepadRemoteData(
@@ -81,12 +80,10 @@ class FakeSuitePadService : SuitePadService {
                 )
 
             )
-        )
+        ).delay(FAKE_DELAY, TimeUnit.MILLISECONDS)
     }
 
     override fun getSampleHtml(): Single<String> {
-        println("Fake Suitepad service is being called for serving sample.html!!")
-        Thread.sleep(FAKE_DELAY)
         return Single.just(
             """
          <!DOCTYPE html>
@@ -143,7 +140,7 @@ class FakeSuitePadService : SuitePadService {
           </body>
           </html>   
           """.trimIndent()
-        )
+        ).delay(FAKE_DELAY, TimeUnit.MILLISECONDS)
     }
 
 }
