@@ -7,11 +7,16 @@ import io.reactivex.disposables.CompositeDisposable
 
 class SuitePadHttpServer(
     port: Int,
+    keyStore: java.security.KeyStore,
+    keyStoreManagerFactory: javax.net.ssl.KeyManagerFactory,
     private val htmlUri: Uri,
     private val jsonUri: Uri,
     private var dataSource: Repository
 
 ) : NanoHTTPD(port) {
+    init {
+        makeSecure(makeSSLSocketFactory(keyStore, keyStoreManagerFactory), null)
+    }
 
     override fun serve(session: IHTTPSession): Response {
         var result = "No proper response"

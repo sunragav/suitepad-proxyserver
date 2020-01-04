@@ -43,6 +43,11 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
+    externalNativeBuild {
+        cmake {
+            path file('CMakeLists.txt')
+        }
+    }
 }
 
 dependencies {
@@ -62,6 +67,7 @@ dependencies {
     implementation "com.squareup.retrofit2:adapter-rxjava2:$retrofit2Version"
     implementation "javax.inject:javax.inject:$javaxInjectVersion"
     implementation "com.squareup.okhttp3:logging-interceptor:$okhttpVersion"
+    implementation "io.reactivex.rxjava2:rxandroid:$rxAndroidVersion"
 
     implementation "com.google.dagger:dagger:$daggerVersion"
     implementation "com.google.dagger:dagger-android:$daggerVersion"

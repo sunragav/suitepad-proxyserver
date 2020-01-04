@@ -112,7 +112,7 @@ class FakeSuitePadService : SuitePadService {
             jsonResponse,
             i,j,
             fields =  ['type', 'name', 'price'];
-            xhReq.open("GET", "http://someremoteurl.com/sample.json", false);
+            xhReq.open("GET", "https://someremoteurl.com/sample.json", false);
             xhReq.send(null);
     
             serverResponse = xhReq.responseText;
