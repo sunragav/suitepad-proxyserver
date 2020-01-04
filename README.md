@@ -1,5 +1,5 @@
 # suitepad-proxyserver
-Proxy server binds with the Suitepad Webview activity via a service connection and communication between them happens via Messenger backed by handler in both the ends.
+Proxy server binds with the [Webview](https://github.com/sunragav/suitepad-weview) activity via a service connection and communication between them happens via Messenger backed by handler in both the ends.
 
 Soon afeter the binding is successful with the Webview Activity, it starts the FileProviderActivity.
 The FileProviderActivity returns the Uri's of the sample.json and sample.html with READ and WRITE permission.
@@ -73,5 +73,5 @@ To install this app from android studio we need to edit the run configurations a
 
 ![Imgur](https://i.imgur.com/3RSH8yL.jpg)
 
-## Note: Because this app uses a permission defined in the webview app, the webview app should be installed first.
+## Note: Because this app uses a permission defined in the webview app, the [webview app](https://github.com/sunragav/suitepad-weview) should be installed first.
 
