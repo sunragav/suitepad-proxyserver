@@ -1,6 +1,6 @@
 # suitepad-proxyserver
 
-## Note: Because this app uses a permission defined in the webview app, the [webview app](https://github.com/sunragav/suitepad-weview) should be installed first.
+## Note: Because the exported components in this app uses a custom permission defined in the webview app,for security reasons, the [webview app](https://github.com/sunragav/suitepad-weview) should be installed first.
 
 Proxy server binds with the [Webview](https://github.com/sunragav/suitepad-weview) activity via a service connection and communication between them happens via Messenger backed by handler in both the ends.
 
