@@ -76,7 +76,7 @@ To install this app from android studio we need to edit the run configurations a
 
 ![Imgur](https://i.imgur.com/3RSH8yL.jpg)
 
-# NOTE: THE RELEASE SIGNING KEY HAS BEEN ADDED JUST FOR THE SAKE OF COMPLETION AND DEMONSTRATION. BECAUSE PROGAURD RULES ARE APPLIED ONLY ON THE RELEASE FLAVOR. THE SIGNING KEY SHOULD BE HIDDEN AND KEPT SECRET FROM OTHERS IN A SECURED PLACE AND ACCESSED VIA CI/CD PROCESS.
+# NOTE: THE RELEASE SIGNING KEY HAS BEEN ADDED JUST FOR THE SAKE OF COMPLETION AND DEMONSTRATION. BECAUSE PROGAURD RULES ARE APPLIED ONLY ON THE RELEASE FLAVOR. THE SIGNING KEY SHOULD BE HIDDEN AND KEPT SECRET FROM OTHERS IN A SECURED PLACE AND ACCESSED VIA CI/CD PROCESS. EACH APP IS SIGNED WITH A DIFFERENT SINGING KEY AS PER THE TASK SPEC.
 
 ## Custom Progaurd rule
 Note the SuitepadRemoteData has been kept as it is a remote data and the GSON library depends on it to map the incoming json from the server response.Without the following rule this class file would have been removed from the final classes.dex, by progaurd.
