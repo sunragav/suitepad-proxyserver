@@ -76,4 +76,27 @@ To install this app from android studio we need to edit the run configurations a
 
 ![Imgur](https://i.imgur.com/3RSH8yL.jpg)
 
+# NOTE: THE RELEASE SIGNING KEY HAS BEEN ADDED JUST FOR THE SAKE OF COMPLETION AND DEMONSTRATION. BECAUSE PROGAURD RULES ARE APPLIED ONLY ON THE RELEASE FLAVOR. THE SIGNING KEY SHOULD BE HIDDEN AND KEPT SECRET FROM OTHERS IN A SECURED PLACE AND ACCESSED VIA CI/CD PROCESS.
 
+## Custom Progaurd rule
+Note the SuitepadRemoteData has been kept as it is a remote data and the GSON library depends on it to map the incoming json from the server response.Without the following rule this class file would have been removed from the final classes.dex, by progaurd.
+```
+-keepnames class com.sunragav.suitepad.data.remotedata.models.SuitepadRemoteData { <fields>; }
+```
+### Following image demonstrates the SuitepadRemoteData and its members have been kept without obfuscation as it is. Without the above rule this file will not be there in the classes.dex
+
+![SuitepadRemoteData and its members kept](https://i.imgur.com/C4TPp3e.jpg)
+
+# Before optimization_shrinking vs After optimization
+
+Before optimization (shrinking+progaurd) the APK size is 3.1 MB and download size is 2.8 MB
+
+![without progaurd](https://i.imgur.com/PjNqV55.jpg)
+
+After optimization the size is 1.4 MB and the download size in 1 MB
+
+![after progaurd](https://i.imgur.com/AWQGJAK.jpg)
+
+## Size comparison
+
+![size comparison](https://i.imgur.com/rs3xX40.jpg)
